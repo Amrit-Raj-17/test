@@ -93,10 +93,6 @@ fetch(url)
     let totalLunch = 0;
     let totalDinner = 0;
 
-    let labels = [];
-    let lunchData = [];
-    let dinnerData = [];
-
     const table = document.getElementById("table");
 
     table.innerHTML = `
@@ -110,29 +106,26 @@ fetch(url)
         </tr>
     `;
 
+    const lunchRow = Object.keys(data[0]).filter(x => data[0][x] == 'Remarks Lunch')[0];
+    const dinnerRow = Object.keys(data[0]).filter(x => data[0][x] == 'Remarks Dinner')[0];
+
     data.forEach((row, index) => {
 
         const date = row["Vikas Tiffin Service "] || "";
         const day = row[""] || "";
 
-        // Skip header + weekends
-        if (index === 0 || day === "Saturday" || day === "Sunday") return;
+        if (index === 0) return;
 
         const lunch = Number(row["Total Lunch"] || 0);
         const dinner = Number(row["Total Dinner"] || 0);
 
-        const lunchRemark = row["22"] || "";
-        const dinnerRemark = row["17"] || "";
+        const lunchRemark = row[lunchRow] || "";
+        const dinnerRemark = row[dinnerRow] || "";
 
         if (!date) return;
 
         totalLunch += lunch;
         totalDinner += dinner;
-
-        // chart data
-        labels.push(date);
-        lunchData.push(lunch);
-        dinnerData.push(dinner);
 
         table.innerHTML += `
             <tr>
@@ -146,7 +139,6 @@ fetch(url)
         `;
     });
 
-    // Update cards
     document.getElementById("totalLunch").innerText = totalLunch;
     document.getElementById("totalDinner").innerText = totalDinner;
 
