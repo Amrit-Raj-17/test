@@ -81,6 +81,7 @@
 </div>
 
 <table id="table"></table>
+</body>
 
 <script>
 const sheetID = "1i839V4Le49Ti_esgs1vTUKC0f5A_NxbA0RY_TbQDil0";
@@ -109,9 +110,13 @@ fetch(url)
     const lunchRow = Object.keys(data[0]).filter(x => data[0][x] == 'Remarks Lunch')[0];
     const dinnerRow = Object.keys(data[0]).filter(x => data[0][x] == 'Remarks Dinner')[0];
 
+    data = data.filter(x => !(x[''] === 'Sunday' || x[''] === 'Saturday') && (x['Total Lunch'] || x['Total Dinner']));
+
+    let html = '';
+
     data.forEach((row, index) => {
 
-        const date = row["Vikas Tiffin Service "] || "";
+        const date = row["Vikas Tiffin Service"] || "";
         const day = row[""] || "";
 
         if (index === 0) return;
@@ -127,7 +132,7 @@ fetch(url)
         totalLunch += lunch;
         totalDinner += dinner;
 
-        table.innerHTML += `
+        const tr = `
             <tr>
                 <td>${date}</td>
                 <td>${day}</td>
@@ -137,13 +142,14 @@ fetch(url)
                 <td class="remark">${dinnerRemark}</td>
             </tr>
         `;
+        html = tr + html;
     });
+
+    table.innerHTML += html;
 
     document.getElementById("totalLunch").innerText = totalLunch;
     document.getElementById("totalDinner").innerText = totalDinner;
 
 });
 </script>
-
-</body>
 </html>
