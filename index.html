@@ -63,6 +63,10 @@
             width: 80%;
             margin: auto;
         }
+
+        .green {
+            background-color: greenyellow;
+        }
     </style>
 </head>
 <body>
@@ -132,13 +136,18 @@ fetch(url)
         totalLunch += lunch;
         totalDinner += dinner;
 
+        const completeLunch = totalLunch % 52 == 0 ? 'green' : '';
+        const completeDinner = totalDinner % 26 == 0 ? 'green' : '';
+        const titleLunch = totalLunch % 52 == 0 ? 'Subscription Ended' : '';
+        const titleDinner = totalDinner % 26 == 0 ? 'Subscription Ended' : '';
+
         const tr = `
             <tr>
                 <td>${date}</td>
                 <td>${day}</td>
-                <td>${lunch || "-"}</td>
+                <td class="${completeLunch}" title="${titleLunch}">${lunch || "-"}</td>
                 <td class="remark">${lunchRemark}</td>
-                <td>${dinner || "-"}</td>
+                <td class="${completeDinner}" title="${titleDinner}">${dinner || "-"}</td>
                 <td class="remark">${dinnerRemark}</td>
             </tr>
         `;
@@ -147,8 +156,8 @@ fetch(url)
 
     table.innerHTML += html;
 
-    document.getElementById("totalLunch").innerText = totalLunch;
-    document.getElementById("totalDinner").innerText = totalDinner;
+    document.getElementById("totalLunch").innerText = totalLunch % 52;
+    document.getElementById("totalDinner").innerText = totalDinner % 26;
 
 });
 </script>
