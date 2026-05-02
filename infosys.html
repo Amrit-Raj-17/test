@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infosys SP Prep Hub</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    body { display: flex; background: #121212; color: #fff; }
+    .sidebar {
+      width: 260px; min-height: 100vh; background: #1e1e1e; padding: 20px; position: fixed;
+      overflow-y: auto;
+    }
+    .sidebar h2 { margin-bottom: 20px; color: #00d4ff; }
+    .sidebar a {
+      display: block; color: #ccc; text-decoration: none; padding: 10px; border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .sidebar a:hover { background: #2c2c2c; color: white; }
+    .content { margin-left: 280px; padding: 30px; width: 100%; }
+    .card {
+      background: #1f1f1f; padding: 20px; border-radius: 16px; margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    h1, h2, h3 { margin-bottom: 15px; }
+    input[type='text'] {
+      width: 100%; padding: 12px; border: none; border-radius: 10px;
+      margin-bottom: 20px; font-size: 16px;
+    }
+    ul { list-style: none; }
+    li { padding: 8px 0; }
+    .question-link {
+      color: #00d4ff; text-decoration: none;
+    }
+    .question-link:hover { text-decoration: underline; }
+    .progress-item { margin-bottom: 8px; }
+    button {
+      padding: 8px 14px; border: none; border-radius: 8px;
+      background: #00d4ff; cursor: pointer; font-weight: bold;
+    }
+    .countdown { font-size: 18px; color: #90ee90; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Infosys SP Hub</h2>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#questions">Questions</a>
+    <a href="#resources">Resources</a>
+    <a href="#progress">Progress</a>
+  </div>
+
+  <div class="content">
+    <section id="dashboard" class="card">
+      <h1>Infosys Specialist Programmer Prep</h1>
+      <p>Personal coding exam dashboard</p>
+      <br>
+      <h3>Exam Countdown</h3>
+      <p class="countdown" id="countdown"></p>
+    </section>
+
+    <section class="card">
+      <h2>Search Questions</h2>
+      <input type="text" id="search" placeholder="Search topic/question..." onkeyup="searchQuestions()">
+    </section>
+
+    <section id="questions" class="card">
+      <h2>Top 65 Questions</h2>
+      <ul id="questionList">
+        <li>Two Sum - <a class="question-link" href="https://leetcode.com/problems/two-sum/" target="_blank">Solve</a></li>
+        <li>Maximum Subarray - <a class="question-link" href="https://leetcode.com/problems/maximum-subarray/" target="_blank">Solve</a></li>
+        <li>Product of Array Except Self - <a class="question-link" href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank">Solve</a></li>
+        <li>Longest Substring Without Repeating Characters - <a class="question-link" href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank">Solve</a></li>
+        <li>Binary Search - <a class="question-link" href="https://leetcode.com/problems/binary-search/" target="_blank">Solve</a></li>
+        <li>Reverse Linked List - <a class="question-link" href="https://leetcode.com/problems/reverse-linked-list/" target="_blank">Solve</a></li>
+        <li>Valid Parentheses - <a class="question-link" href="https://leetcode.com/problems/valid-parentheses/" target="_blank">Solve</a></li>
+        <li>Number of Islands - <a class="question-link" href="https://leetcode.com/problems/number-of-islands/" target="_blank">Solve</a></li>
+        <li>Course Schedule - <a class="question-link" href="https://leetcode.com/problems/course-schedule/" target="_blank">Solve</a></li>
+        <li>Climbing Stairs - <a class="question-link" href="https://leetcode.com/problems/climbing-stairs/" target="_blank">Solve</a></li>
+        <li>House Robber - <a class="question-link" href="https://leetcode.com/problems/house-robber/" target="_blank">Solve</a></li>
+        <li>Coin Change - <a class="question-link" href="https://leetcode.com/problems/coin-change/" target="_blank">Solve</a></li>
+        <li>Longest Increasing Subsequence - <a class="question-link" href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank">Solve</a></li>
+        <li>Merge Intervals - <a class="question-link" href="https://leetcode.com/problems/merge-intervals/" target="_blank">Solve</a></li>
+        <li>Task Scheduler - <a class="question-link" href="https://leetcode.com/problems/task-scheduler/" target="_blank">Solve</a></li>
+      </ul>
+    </section>
+
+    <section id="resources" class="card">
+      <h2>Resources</h2>
+      <ul>
+        <li><a class="question-link" href="https://takeuforward.org/strivers-a2z-dsa-course/" target="_blank">Striver A2Z DSA</a></li>
+        <li><a class="question-link" href="https://neetcode.io/roadmap" target="_blank">NeetCode Roadmap</a></li>
+        <li><a class="question-link" href="https://cses.fi/problemset/" target="_blank">CSES Problem Set</a></li>
+        <li><a class="question-link" href="https://atcoder.jp/contests/dp/tasks" target="_blank">AtCoder DP</a></li>
+      </ul>
+    </section>
+
+    <section id="progress" class="card">
+      <h2>Progress Tracker</h2>
+      <div class="progress-item"><input type="checkbox" onchange="saveProgress(this, 'arrays')"> Arrays</div>
+      <div class="progress-item"><input type="checkbox" onchange="saveProgress(this, 'dp')"> Dynamic Programming</div>
+      <div class="progress-item"><input type="checkbox" onchange="saveProgress(this, 'graphs')"> Graphs</div>
+      <div class="progress-item"><input type="checkbox" onchange="saveProgress(this, 'trees')"> Trees</div>
+    </section>
+  </div>
+
+  <script>
+    function searchQuestions() {
+      let input = document.getElementById('search').value.toLowerCase();
+      let items = document.querySelectorAll('#questionList li');
+      items.forEach(item => {
+        item.style.display = item.textContent.toLowerCase().includes(input) ? '' : 'none';
+      });
+    }
+
+    function saveProgress(checkbox, key) {
+      localStorage.setItem(key, checkbox.checked);
+    }
+
+    function loadProgress() {
+      document.querySelectorAll('#progress input').forEach(cb => {
+        let key = cb.getAttribute('onchange').match(/'(.*?)'/)[1];
+        cb.checked = localStorage.getItem(key) === 'true';
+      });
+    }
+
+    function updateCountdown() {
+      const examDate = new Date('2026-06-01');
+      const now = new Date();
+      const diff = examDate - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById('countdown').innerText = days + ' days remaining';
+    }
+
+    loadProgress();
+    updateCountdown();
+  </script>
+</body>
+</html>
